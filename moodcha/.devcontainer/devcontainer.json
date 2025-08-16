@@ -1,0 +1,31 @@
+{
+  "name": "Java DevContainer",
+  "image": "mcr.microsoft.com/devcontainers/java:1-21-bookworm",
+  "features": {
+    "ghcr.io/devcontainers/features/mysql:1": {
+      "version": "21",
+      "installMaven": "false",
+      "installGradle": "false"
+    }
+  },
+
+  "ghcr.io/devcontainers-contrib-features/msql-homebrew:1": {
+    "customisations": {
+      "vscode": {
+        "extensions": [
+          "esbenp.prettier-vscode",
+          "vscjava.vscode-java-pack",
+          "vmware.vscode-boot-dev-pack",
+          "cweijan.vscode-mysql-client2",
+          "GitHub.vscode-pull-request-github",
+          "github.codespaces",
+          "bierner.github-markdown-preview",
+          "Postman.postman-for-vscode"
+        ]
+      }
+    },
+    "forwardPorts": [8080],
+    "postStartCommand": "mysql.server start"
+  }
+
+}
