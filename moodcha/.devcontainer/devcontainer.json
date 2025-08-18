@@ -1,31 +1,29 @@
 {
-  "name": "Java DevContainer",
+  "name": "Java + Maven + MySQL",
   "image": "mcr.microsoft.com/devcontainers/java:1-21-bookworm",
   "features": {
-    "ghcr.io/devcontainers/features/mysql:1": {
-      "version": "21",
+    "ghcr.io/devcontainers/features/java:1": {
+      "version": "none",
       "installMaven": "false",
       "installGradle": "false"
+    },
+    "ghcr.io/devcontainers-contrib/features/mysql-homebrew:1": {}
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "esbenp.prettier-vscode",
+        "vscjava.vscode-java-pack",
+        "vmware.vscode-boot-dev-pack",
+        "cweijan.vscode-mysql-client2",
+        "GitHub.vscode-pull-request-github",
+        "github.codespaces",
+        "bierner.github-markdown-preview",
+        "Postman.postman-for-vscode"
+      ]
     }
   },
-
-  "ghcr.io/devcontainers-contrib-features/msql-homebrew:1": {
-    "customisations": {
-      "vscode": {
-        "extensions": [
-          "esbenp.prettier-vscode",
-          "vscjava.vscode-java-pack",
-          "vmware.vscode-boot-dev-pack",
-          "cweijan.vscode-mysql-client2",
-          "GitHub.vscode-pull-request-github",
-          "github.codespaces",
-          "bierner.github-markdown-preview",
-          "Postman.postman-for-vscode"
-        ]
-      }
-    },
-    "forwardPorts": [8080],
-    "postStartCommand": "mysql.server start"
-  }
-
+  "forwardPorts": [8080, 3306],
+  "postStartCommand": "mysql.server start",
+  "remoteUser": "vscode"
 }
