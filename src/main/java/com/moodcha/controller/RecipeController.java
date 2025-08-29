@@ -1,5 +1,5 @@
 package com.moodcha.controller;
 
-public class MoodchaController {
+public class RecipeController {
 
 }

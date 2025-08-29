@@ -1,5 +1,5 @@
 package com.moodcha.service;
 
-public class MoodchaService {
+public class RecipeService {
 
 }
