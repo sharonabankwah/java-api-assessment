@@ -1,5 +1,5 @@
 package com.moodcha.repository;
 
-public class MoodchaRepository {
+public class RecipeRepository {
 
 }
