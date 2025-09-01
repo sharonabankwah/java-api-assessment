@@ -27,7 +27,9 @@ List<Recipe> findByMoodWithSupplements(@Param("mood")Mood mood);
 @Query("SELECT r FROM Recipe WHERE :allergy NOT MEMBER OF r.allergies")
 List<Recipe> findRecipesWithoutAllergy(@Param("allergy")String allergy);
 
-@Query(value = "SELECT * FROM recipes ORDER BY RAND() LIMIT 1", nativeQuery = true)
+@Query(value = "SELECT * FROM recipes" +
+               "WHERE mood IS NOT NULL AND flavour IS NOT NULL AND milk IS NOT NULL" +
+               "ORDER BY RAND() LIMIT 1", nativeQuery = true)
 Optional<Recipe> findRandomRecipe();
 
 }
