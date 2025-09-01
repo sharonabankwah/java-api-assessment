@@ -9,6 +9,7 @@ import com.moodcha.model.enums.Flavour;
 import com.moodcha.model.enums.Milk;
 import java.util.List;
 import java.util.UUID;
+import java.util.Optional;
 
 public interface RecipeRepository extends JpaRepository<Recipe, UUID> {
 
@@ -25,5 +26,8 @@ List<Recipe> findByMoodWithSupplements(@Param("mood")Mood mood);
 
 @Query("SELECT r FROM Recipe WHERE :allergy NOT MEMBER OF r.allergies")
 List<Recipe> findRecipesWithoutAllergy(@Param("allergy")String allergy);
+
+@Query(value = "SELECT * FROM recipes ORDER BY RAND() LIMIT 1", nativeQuery = true)
+Optional<Recipe> findRandomRecipe();
 
 }
