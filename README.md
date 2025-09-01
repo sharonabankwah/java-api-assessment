@@ -1,13 +1,13 @@
-# 🍵 Moodcha
+### 🍵 Moodcha
 
 Moodcha is a Spring Boot–based REST API that generates matcha recipe recommendations tailored to a user’s mood, flavour preferences, milk choices, and dietary requirements.
 
 
-# ✨ Features
+### ✨ Features
 
 
 
-# 🛠 Tech Stack
+### 🛠 Tech Stack
 
 * Java 21
 * Spring Boot
@@ -16,8 +16,8 @@ Moodcha is a Spring Boot–based REST API that generates matcha recipe recommend
 * Maven
 
 
-# 📂 Project Structure
-
+### 📂 Project Structure
+```css
 src/main/java/com/moodcha
  ┣ model/
  ┃ ┣ Recipe.java
@@ -31,16 +31,17 @@ src/main/java/com/moodcha
  ┃ ┗ RecipeService.java
  ┣ controller/
  ┃ ┗ RecipeController.java
+```
 
- # 🚀 Getting Started
+### 🚀 Getting Started
 
- ## Prerequisites 
+#### Prerequisites 
 
  * Java 21
  * Maven 3+
  * MySQL
 
-## Installation
+#### Installation
 
 1. Clone the repository
 
