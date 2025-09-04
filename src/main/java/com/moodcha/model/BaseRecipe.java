@@ -17,6 +17,7 @@ public abstract class BaseRecipe {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
+  @Column(updatable = false, nullable = false)
   private UUID id;
 
   @Enumerated(EnumType.STRING)
@@ -31,5 +32,61 @@ public abstract class BaseRecipe {
 
   private String supplements;
   private String allergies;
+
+  public BaseRecipe(Mood mood, Flavour flavour, Temperature temperature, String supplements, String allergies) {
+    this.mood = mood;
+    this.flavour = flavour;
+    this.temperature = temperature;
+    this.supplements = supplements;
+    this.allergies = allergies;
+  }
+
+  public BaseRecipe() {
+    // no-arg constructor
+  }
+
+  public UUID getId() {
+    return id;
+  }
+
+  public Mood getMood() {
+    return mood;
+  }
+
+  public Flavour getFlavour() {
+    return flavour;
+  }
+
+  public Temperature getTemperature() {
+    return temperature;
+  }
+
+  public String getSupplements() {
+    return supplements;
+  }
+
+  public String getAllergies() {
+    return allergies;
+  }
+
+  public void setMood(Mood mood) {
+    this.mood = mood;
+  }
+
+  public void setFlavour(Flavour flavour) {
+    this.flavour = flavour;
+  }
+
+  public void setTemperature(Temperature temperature) {
+    this.temperature = temperature;
+  }
+
+  public void setSupplements(String supplements) {
+    this.supplements = supplements;
+  }
+
+  public void setAllergies(String allergies) {
+    this.allergies = allergies;
+  }
 
 }
