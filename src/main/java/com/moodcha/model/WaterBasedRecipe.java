@@ -19,6 +19,10 @@ public class WaterBasedRecipe extends BaseRecipe {
   @Enumerated(EnumType.STRING)
   private WaterType water;
 
+  @Column(nullable = false)
+  @Enumerated(EnumType.STRING)
+  private Temperature temperature = Temperature.ICED;
+
   public WaterBasedRecipe(Mood mood, Flavour flavour, Temperature temperature, SyrupType syrup, String supplements, 
                          String allergies, WaterType water) {
       super(mood, flavour, temperature, syrup, supplements, allergies);
