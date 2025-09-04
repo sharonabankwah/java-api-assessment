@@ -7,6 +7,7 @@ import com.moodcha.model.MilkBasedRecipe;
 import com.moodcha.model.enums.Mood;
 import com.moodcha.model.enums.Flavour;
 import com.moodcha.model.enums.MilkType;
+import com.moodcha.model.enums.SyrupType;
 import java.util.List;
 import java.util.UUID;
 import java.util.Optional;
@@ -22,6 +23,8 @@ public interface MilkBasedRepository extends JpaRepository<MilkBasedRecipe, UUID
   List<MilkBasedRecipe> findByMilkType(MilkType milk);
 
   List<MilkBasedRecipe> findByTemperature(Temperature temperature);
+
+  List<MilkBasedRecipe> findBySyrup(SyrupType syrup);
 
   List<MilkBasedRecipe> findByMoodAndFlavourAndMilkType(Mood mood, Flavour flavour, MilkType milk);
 
