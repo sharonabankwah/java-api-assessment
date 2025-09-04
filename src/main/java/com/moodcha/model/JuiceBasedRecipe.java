@@ -4,6 +4,7 @@ import com.moodcha.model.enums.Flavour;
 import com.moodcha.model.enums.JuiceType;
 import com.moodcha.model.enums.Mood;
 import com.moodcha.model.enums.Temperature;
+import com.moodcha.model.enums.SyrupType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -18,9 +19,9 @@ public class JuiceBasedRecipe extends BaseRecipe {
   @Enumerated(EnumType.STRING)
   private JuiceType juice;
 
-  public JuiceBasedRecipe(Mood mood, Flavour flavour, Temperature temperature, String supplements, 
+  public JuiceBasedRecipe(Mood mood, Flavour flavour, Temperature temperature, SyrupType syrup, String supplements, 
                          String allergies, JuiceType juice) {
-      super(mood, flavour, temperature, supplements, allergies);
+      super(mood, flavour, temperature, syrup, supplements, allergies);
       this.juice = juice;
   }
 

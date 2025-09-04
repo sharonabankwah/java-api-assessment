@@ -4,6 +4,7 @@ import com.moodcha.model.enums.Mood;
 import com.moodcha.model.enums.Flavour;
 import com.moodcha.model.enums.MilkType;
 import com.moodcha.model.enums.Temperature;
+import com.moodcha.model.enums.SyrupType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -19,9 +20,9 @@ public class MilkBasedRecipe extends BaseRecipe {
   private MilkType milk;
 
 
-  public MilkBasedRecipe(Mood mood, Flavour flavour, Temperature temperature, String supplements, 
+  public MilkBasedRecipe(Mood mood, Flavour flavour, Temperature temperature, SyrupType syrup, String supplements, 
                          String allergies, MilkType milk) {
-      super(mood, flavour, temperature, supplements, allergies);
+      super(mood, flavour, temperature, syrup, supplements, allergies);
       this.milk = milk;
   }
 
