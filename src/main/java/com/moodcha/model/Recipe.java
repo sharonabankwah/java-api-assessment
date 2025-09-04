@@ -3,6 +3,7 @@ package com.moodcha.model;
 import com.moodcha.model.enums.Mood;
 import com.moodcha.model.enums.Flavour;
 import com.moodcha.model.enums.Milk;
+import com.moodcha.model.enums.Temperature;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -31,13 +32,18 @@ public class Recipe {
   @Enumerated(EnumType.STRING)
   private Milk milk;
 
+  @Column(nullable =  false)
+  @Enumerated(EnumType.STRING)
+  private Temperature temperature;
+
   private String supplements;
   private String allergies;
 
-  public Recipe(Mood mood, Flavour flavour, Milk milk, String supplements, String allergies) {
+  public Recipe(Mood mood, Flavour flavour, Milk milk, Temperature temperature, String supplements, String allergies) {
     this.mood = mood;
     this.flavour = flavour;
     this.milk = milk;
+    this.temperature = temperature;
     this.supplements = supplements;
     this.allergies = allergies;
   }
@@ -62,6 +68,10 @@ public class Recipe {
     return milk;
   }
 
+  public Temperature getTemperature() {
+    return temperature;
+  }
+
   public String getSupplements() {
     return supplements;
   }
@@ -80,6 +90,10 @@ public class Recipe {
 
   public void setMilk(Milk milk) {
     this.milk = milk;
+  }
+
+  public void setTemperature(Temperature temperature) {
+    this.temperature = temperature;
   }
 
   public void setSupplements(String supplements) {
