@@ -2,6 +2,9 @@ package com.moodcha.service;
 
 import org.springframework.stereotype.Service;
 import com.moodcha.model.BaseRecipe;
+import com.moodcha.model.MilkBasedRecipe;
+import com.moodcha.model.WaterBasedRecipe;
+import com.moodcha.model.JuiceBasedRecipe;
 import com.moodcha.repository.JuiceBasedRepository;
 import com.moodcha.repository.MilkBasedRepository;
 import com.moodcha.repository.WaterBasedRepository;
@@ -19,6 +22,18 @@ public class RecipeService {
     this.milkRepo = milkRepo;
     this.waterRepo = waterRepo;
     this.juiceRepo = juiceRepo;
+  }
+
+  public BaseRecipe createRecipe(BaseRecipe recipe) {
+    if (recipe instanceof MilkBasedRecipe) {
+        return milkRepo.save((MilkBasedRecipe) recipe);
+    } else if (recipe instanceof WaterBasedRecipe) {
+        return waterRepo.save((WaterBasedRecipe) recipe);
+    } else if (recipe instanceof JuiceBasedRecipe) {
+        return juiceRepo.save((JuiceBasedRecipe) recipe);
+    } else {
+      throw new IllegalArgumentException("Unknown recipe.");
+    }
   }
 
   public List<BaseRecipe> getAllMoods(Mood mood) {

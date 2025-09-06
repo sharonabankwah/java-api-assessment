@@ -9,7 +9,7 @@ import com.moodcha.model.enums.JuiceType;
 import java.util.List;
 import java.util.UUID;
 
-public interface JuiceBasedRepository extends JpaRepository<JuiceBasedRepository, UUID> {
+public interface JuiceBasedRepository extends JpaRepository<JuiceBasedRecipe, UUID> {
 
   List<JuiceBasedRecipe> findByMood(Mood mood);
 

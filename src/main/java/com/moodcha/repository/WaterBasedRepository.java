@@ -10,7 +10,7 @@ import com.moodcha.model.enums.WaterType;
 import java.util.UUID;
 import java.util.List;
 
-public interface WaterBasedRepository extends JpaRepository<WaterBasedRepository, UUID> {
+public interface WaterBasedRepository extends JpaRepository<WaterBasedRecipe, UUID> {
 
   List<WaterBasedRecipe> findByMood(Mood mood);
 
