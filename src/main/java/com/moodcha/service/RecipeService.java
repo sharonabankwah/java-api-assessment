@@ -1,5 +1,6 @@
 package com.moodcha.service;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 import com.moodcha.model.BaseRecipe;
 import com.moodcha.model.MilkBasedRecipe;
@@ -8,9 +9,12 @@ import com.moodcha.model.JuiceBasedRecipe;
 import com.moodcha.repository.JuiceBasedRepository;
 import com.moodcha.repository.MilkBasedRepository;
 import com.moodcha.repository.WaterBasedRepository;
+import jakarta.persistence.EntityNotFoundException;
 import com.moodcha.model.enums.Mood;
 import java.util.List;
+import java.util.UUID;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Service
 public class RecipeService {
@@ -32,7 +36,43 @@ public class RecipeService {
     } else if (recipe instanceof JuiceBasedRecipe) {
         return juiceRepo.save((JuiceBasedRecipe) recipe);
     } else {
-      throw new IllegalArgumentException("Unknown recipe.");
+      throw new IllegalArgumentException("Oops... unknown recipe. Try again!");
+    }
+  }
+
+  public BaseRecipe getRecipeById(UUID id) {
+    List<JpaRepository<? extends BaseRecipe, UUID>> repos = List.of(milkRepo, waterRepo, juiceRepo);
+
+    for (JpaRepository<? extends BaseRecipe, UUID> repo : repos) {
+        Optional<? extends BaseRecipe> recipeFound = repo.findById(id);
+        if (recipeFound.isPresent()) {
+            return recipeFound.get();
+        }
+    }
+    throw new RuntimeException("Oops... recipe not found with id: " + id + " Try again!");
+  }
+
+  public BaseRecipe updateRecipe(UUID id, BaseRecipe updatedRecipe) {
+    BaseRecipe existingRecipe = getRecipeById(id);
+
+    existingRecipe.setMood(updatedRecipe.getMood());
+    existingRecipe.setFlavour(updatedRecipe.getFlavour());
+    existingRecipe.setTemperature(updatedRecipe.getTemperature());
+    existingRecipe.setSyrup(updatedRecipe.getSyrup());
+    existingRecipe.setAllergies(updatedRecipe.getAllergies());
+    existingRecipe.setSupplements(updatedRecipe.getSupplements());
+
+  }
+
+  public void deleteRecipe(UUID id) {
+    if (milkRepo.existsById(id)) {
+      milkRepo.deleteById(id);
+    } else if (waterRepo.existsById(id)) {
+      waterRepo.deleteById(id);
+    } else if (juiceRepo.existsById(id)) {
+      juiceRepo.deleteById(id);
+    } else {
+      throw new EntityNotFoundException("Oops... recipe not found with id: " + id + " Try again!");
     }
   }
 
