@@ -62,6 +62,24 @@ public class RecipeService {
     existingRecipe.setAllergies(updatedRecipe.getAllergies());
     existingRecipe.setSupplements(updatedRecipe.getSupplements());
 
+    /* Child-specific fields */
+    if (existingRecipe instanceof MilkBasedRecipe && updatedRecipe instanceof MilkBasedRecipe) {
+      ((MilkBasedRecipe) existingRecipe).setMilk(((MilkBasedRecipe) updatedRecipe).getMilk());
+    } else if (existingRecipe instanceof WaterBasedRecipe && updatedRecipe instanceof WaterBasedRecipe) {
+      ((WaterBasedRecipe) existingRecipe).setWater(((WaterBasedRecipe) updatedRecipe).getWater());
+    } else if (existingRecipe instanceof JuiceBasedRecipe && updatedRecipe instanceof JuiceBasedRecipe) {
+      ((JuiceBasedRecipe) existingRecipe).setJuice(((JuiceBasedRecipe) updatedRecipe).getJuice());
+    }
+
+    if (existingRecipe instanceof MilkBasedRecipe) {
+      return milkRepo.save((MilkBasedRecipe) existingRecipe);
+    } else if (existingRecipe instanceof WaterBasedRecipe) {
+      return waterRepo.save((WaterBasedRecipe) existingRecipe);
+    } else if (existingRecipe instanceof JuiceBasedRecipe) {
+      return juiceRepo.save((JuiceBasedRecipe) existingRecipe);
+    } else {
+      throw new IllegalArgumentException("Oops... unknown recipe. Try again!");
+    }
   }
 
   public void deleteRecipe(UUID id) {
