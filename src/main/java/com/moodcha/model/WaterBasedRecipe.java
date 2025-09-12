@@ -21,7 +21,7 @@ public class WaterBasedRecipe extends BaseRecipe {
 
   @Column(nullable = false)
   @Enumerated(EnumType.STRING)
-  private Temperature temperature = Temperature.ICED;
+  private Temperature temperature = Temperature.HOT;
 
   public WaterBasedRecipe(Mood mood, Flavour flavour, Temperature temperature, SyrupType syrup, String supplements, 
                          String allergies, WaterType water) {
