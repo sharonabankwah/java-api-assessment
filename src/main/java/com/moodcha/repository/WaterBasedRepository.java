@@ -1,11 +1,11 @@
 package com.moodcha.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-
 import com.moodcha.model.WaterBasedRecipe;
 import com.moodcha.model.enums.Flavour;
 import com.moodcha.model.enums.Mood;
 import com.moodcha.model.enums.SyrupType;
+import com.moodcha.model.enums.Temperature;
 import com.moodcha.model.enums.WaterType;
 import java.util.UUID;
 import java.util.List;
@@ -19,5 +19,7 @@ public interface WaterBasedRepository extends JpaRepository<WaterBasedRecipe, UU
   List<WaterBasedRecipe> findBySyrup(SyrupType syrup);
 
   List<WaterBasedRecipe> findByWaterType(WaterType water);
+
+  List<WaterBasedRecipe> findByTemperature(Temperature temperature);
 
 }
