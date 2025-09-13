@@ -49,4 +49,8 @@ src/main/java/com/moodcha
 
 3. Build the project
 
-4. Run the application
+```bash
+  ./mvnw spring-boot:run
+```
+
+5. Run the application
