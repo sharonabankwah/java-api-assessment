@@ -2,8 +2,7 @@ package com.moodcha.service;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
-
-import com.fasterxml.jackson.databind.JsonSerializable.Base;
+import com.moodcha.exception.RecipeNotFoundException;
 import com.moodcha.model.BaseRecipe;
 import com.moodcha.model.MilkBasedRecipe;
 import com.moodcha.model.WaterBasedRecipe;
@@ -11,7 +10,6 @@ import com.moodcha.model.JuiceBasedRecipe;
 import com.moodcha.repository.JuiceBasedRepository;
 import com.moodcha.repository.MilkBasedRepository;
 import com.moodcha.repository.WaterBasedRepository;
-import jakarta.persistence.EntityNotFoundException;
 import com.moodcha.model.enums.Mood;
 import com.moodcha.model.enums.SyrupType;
 import com.moodcha.model.enums.Temperature;
@@ -21,12 +19,14 @@ import java.util.List;
 import java.util.UUID;
 import java.util.ArrayList;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class RecipeService {
   private final MilkBasedRepository milkRepo;
   private final WaterBasedRepository waterRepo;
   private final JuiceBasedRepository juiceRepo;
+  private final Random random = new Random();
 
   public RecipeService(MilkBasedRepository milkRepo, WaterBasedRepository waterRepo, JuiceBasedRepository juiceRepo) {
     this.milkRepo = milkRepo;
@@ -55,7 +55,7 @@ public class RecipeService {
             return recipeFound.get();
         }
     }
-    throw new RuntimeException("Oops... recipe not found with id: " + id + " Try again!");
+    throw new RecipeNotFoundException("Oops... recipe not found with id: " + id + " Try again!");
   }
 
   public List<BaseRecipe> getAllRecipes() {
@@ -76,7 +76,7 @@ public class RecipeService {
     existingRecipe.setAllergies(updatedRecipe.getAllergies());
     existingRecipe.setSupplements(updatedRecipe.getSupplements());
 
-    /* Child-specific fields */
+    // Child-specific fields
     if (existingRecipe instanceof MilkBasedRecipe && updatedRecipe instanceof MilkBasedRecipe) {
       ((MilkBasedRecipe) existingRecipe).setMilk(((MilkBasedRecipe) updatedRecipe).getMilk());
     } else if (existingRecipe instanceof WaterBasedRecipe && updatedRecipe instanceof WaterBasedRecipe) {
@@ -96,7 +96,7 @@ public class RecipeService {
     }
   }
 
-  public void deleteRecipe(UUID id) {
+  public void deleteRecipeById(UUID id) {
     if (milkRepo.existsById(id)) {
       milkRepo.deleteById(id);
     } else if (waterRepo.existsById(id)) {
@@ -104,7 +104,7 @@ public class RecipeService {
     } else if (juiceRepo.existsById(id)) {
       juiceRepo.deleteById(id);
     } else {
-      throw new EntityNotFoundException("Oops... recipe not found with id: " + id + " Try again!");
+      throw new RecipeNotFoundException("Oops... recipe not found with id: " + id + " Try again!");
     }
   }
 
@@ -142,7 +142,7 @@ public class RecipeService {
     return temperatureResults; 
   }
 
-  public List<BaseRecipe> getAllSyruRecipes(SyrupType syrup) {
+  public List<BaseRecipe> getAllSyrupRecipes(SyrupType syrup) {
     List<BaseRecipe> syrupResults = new ArrayList<>();
     syrupResults.addAll(milkRepo.findBySyrup(syrup));
     syrupResults.addAll(waterRepo.findBySyrup(syrup));
@@ -150,5 +150,11 @@ public class RecipeService {
     return syrupResults;
   }
 
-
+  public BaseRecipe getRandomRecipe() {
+    List<BaseRecipe> randomResults = getAllRecipes();
+    if (randomResults.isEmpty()) {
+      throw new RecipeNotFoundException("Oops... no recipes found. Try again!");
+    }
+    return randomResults.get(random.nextInt(randomResults.size()));
+  }
 }
