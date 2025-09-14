@@ -99,6 +99,7 @@ cd java-api-assessment
 ```bash
 ./mvnw clean install -DskipTests
 ```
+Note: skipping tests avoids the current context-load issue.
 
 4. Run the application
 
