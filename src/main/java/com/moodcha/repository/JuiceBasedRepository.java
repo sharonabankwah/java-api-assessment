@@ -18,7 +18,7 @@ public interface JuiceBasedRepository extends JpaRepository<JuiceBasedRecipe, UU
 
   List<JuiceBasedRecipe> findBySyrup(SyrupType syrup);
 
-  List<JuiceBasedRecipe> findByJuiceType(JuiceType juice);
+  List<JuiceBasedRecipe> findByJuice(JuiceType juice);
 
   List<JuiceBasedRecipe> findByTemperature(Temperature temperature);
 

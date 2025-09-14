@@ -20,22 +20,22 @@ public interface MilkBasedRepository extends JpaRepository<MilkBasedRecipe, UUID
 
   List<MilkBasedRecipe> findByFlavour(Flavour flavour);
 
-  List<MilkBasedRecipe> findByMilkType(MilkType milk);
+  List<MilkBasedRecipe> findByMilk(MilkType milk);
 
   List<MilkBasedRecipe> findByTemperature(Temperature temperature);
 
   List<MilkBasedRecipe> findBySyrup(SyrupType syrup);
 
-  List<MilkBasedRecipe> findByMoodAndFlavourAndMilkType(Mood mood, Flavour flavour, MilkType milk);
+  List<MilkBasedRecipe> findByMoodAndFlavourAndMilk(Mood mood, Flavour flavour, MilkType milk);
 
-  @Query("SELECT r FROM MilkBasedRecipe WHERE r.mood = :mood AND r.supplements IS NOT NULL")
+  @Query("SELECT r FROM MilkBasedRecipe r WHERE r.mood = :mood AND r.supplements IS NOT NULL")
   List<MilkBasedRecipe> findByMoodWithSupplements(@Param("mood")Mood mood);
 
-  @Query("SELECT r FROM MilkBasedRecipe WHERE :allergy NOT MEMBER OF r.allergies")
+  @Query("SELECT r FROM MilkBasedRecipe r WHERE :allergy != r.allergies")
   List<MilkBasedRecipe> findRecipesWithoutAllergy(@Param("allergy")String allergy);
 
-  @Query(value = "SELECT * FROM MilkBasedRecipe" +
-                 "WHERE mood IS NOT NULL AND flavour IS NOT NULL AND milk IS NOT NULL" +
+  @Query(value = "SELECT * FROM MilkBasedRecipe " +
+                 "WHERE mood IS NOT NULL AND flavour IS NOT NULL AND milk IS NOT NULL " +
                  "ORDER BY RAND() LIMIT 1", nativeQuery = true)
   Optional<MilkBasedRecipe> findRandomRecipe();
 

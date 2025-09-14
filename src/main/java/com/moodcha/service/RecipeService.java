@@ -125,7 +125,7 @@ public class RecipeService {
   }
 
   public List<MilkBasedRecipe> getSpecificMilkRecipes(MilkType milk) {
-    return milkRepo.findByMilkType(milk);
+    return milkRepo.findByMilk(milk);
   }
 
   public List<BaseRecipe> getRecipesByTemperature(Temperature temperature) {
