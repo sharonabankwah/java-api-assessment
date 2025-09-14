@@ -4,24 +4,23 @@ Moodcha is a Spring Boot–based REST API that manages matcha recipes tailored t
 
 ### 📚 Table of Contents
 
-- [Features](###features)  
-- [Tech Stack](###tech-stack)  
-- [Prerequisites](###prerequisites)  
-- [Project Structure](###project-structure)  
-- [Installation](####installation)  
-- [Database Setup & Sample Data](###database-setup--sample-data)  
-- [API Endpoints](###api-endpoints)  
-- [Exception Handling](###exception-handling)  
-- [Testing](###testing)
+- [Features](#features)  
+- [Tech Stack](#tech-stack)  
+- [Prerequisites](#prerequisites)  
+- [Project Structure](#project-structure)  
+- [Installation](#installation)  
+- [Database Setup & Sample Data](#database-setup--sample-data)  
+- [API Endpoints](#api-endpoints)  
+- [Exception Handling](#exception-handling)  
+- [Testing](#testing)
 
 ### ✨ Features
 
-* Full CRUD (Create, Read, Update, Delete) operations on recipes  
-* Query filters on recipes by mood, flavour, milk type, temperature, syrup type  
-* Random recipe retrieval  
-* Unit test for service class 
-* Custom exceptions for recipes not found  
-* Structured documentation and unit testing
+* **Full CRUD Operations** – Create, read, update, and delete recipes through RESTful endpoints.  
+* **Filtered Queries** – Retrieve recipes by mood, flavour, temperature, syrup etc. using Spring Data JPA query methods.  
+* **Random Recipe Endpoint** – Get a single random recipe for quick suggestions.  
+* **Exception Handling** – Custom exceptions with a global handler which returns clear HTTP error responses.  
+* **Unit Testing** – Service layer tested with JUnit 5 and Mockito to verify core logic.
 
 ### 🛠 Tech Stack
 
@@ -30,15 +29,14 @@ Moodcha is a Spring Boot–based REST API that manages matcha recipes tailored t
 * Spring Data JPA
 * MySQL
 * Maven
-* JUnit 5 + Mockito for unit tests
+* JUnit 5 + Mockito
 
 ### 💻 Prerequisites
 
 * Java 21
 * MySQL
 * Maven 3+
-* IDE
-
+* VSCode
 
 ### 📂 Project Structure
 ```css
@@ -105,7 +103,7 @@ cd java-api-assessment
 4. Run the application
 
 ```bash
-  ./mvnw spring-boot:run
+./mvnw spring-boot:run
 ```
 
 ### Database Setup
