@@ -18,7 +18,7 @@ public abstract class BaseRecipe {
 
   @Id
   @GeneratedValue(strategy = GenerationType.UUID)
-  @Column(updatable = false, nullable = false)
+  @Column(length = 36, updatable = false, nullable = false)
   private UUID id;
 
   @Enumerated(EnumType.STRING)
