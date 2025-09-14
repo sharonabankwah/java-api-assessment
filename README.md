@@ -4,15 +4,15 @@ Moodcha is a Spring Boot–based REST API that manages matcha recipes tailored t
 
 ### 📚 Table of Contents
 
-- [Features](#features)  
-- [Tech Stack](#tech-stack)  
-- [Prerequisites](#prerequisites)  
-- [Project Structure](#project-structure)  
-- [Installation](#installation)  
-- [Database Setup & Sample Data](#database-setup--sample-data)  
-- [API Endpoints](#api-endpoints)  
-- [Exception Handling](#exception-handling)  
-- [Testing](#testing)
+- [Features](###features)  
+- [Tech Stack](###tech-stack)  
+- [Prerequisites](###prerequisites)  
+- [Project Structure](###project-structure)  
+- [Installation](####installation)  
+- [Database Setup & Sample Data](###database-setup--sample-data)  
+- [API Endpoints](###api-endpoints)  
+- [Exception Handling](###exception-handling)  
+- [Testing](###testing)
 
 ### ✨ Features
 
@@ -72,13 +72,15 @@ src/
  ┃ ┃ ┃ ┃ ┣ service/
  ┃ ┃ ┃ ┃ ┃ ┗ RecipeService.java
  ┃ ┃ ┃ ┃ ┗ RecipeApplication.java
- ┣ resources/
- ┃ ┣ static/
- ┃ ┣ templates/
- ┃ ┃ ┗ moodchaDatabaseDump.sql
+ ┃ ┃ ┣ resources/
+ ┃ ┃ ┃ ┣ static/
+ ┃ ┃ ┃ ┣ templates/
+ ┃ ┃ ┃ ┃ ┗ moodchaDatabaseDump.sql
  ┃ ┣ application.properties
  ┃ ┗ local.properties
 ```
+
+Note: MySQL database dump can be located at src/main/resources/templates/moodchaDatabaseDump.sql
 
 ### 🚀 Getting Started
 
