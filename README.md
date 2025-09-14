@@ -110,11 +110,11 @@ cd java-api-assessment
 
 1. Ensure your MySQL server is running. Create the database if not already present:
 ```sql
-CREATE DATABASE moodcha;
+CREATE DATABASE IF NOT EXISTS moodcha;
 USE moodcha;
 ```
 
-2. Import the sample data:
+2. Then run this command to import the sample data:
 ```bash
 mysql -u <username> -p moodcha < src/main/resources/templates/moodchaDatabaseDump.sql
 ```
