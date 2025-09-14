@@ -97,7 +97,7 @@ cd java-api-assessment
 
 3. Build the project
 ```bash
-./mvnw clean install
+./mvnw clean install -DskipTests
 ```
 
 4. Run the application
