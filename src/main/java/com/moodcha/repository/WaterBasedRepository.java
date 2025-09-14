@@ -18,7 +18,7 @@ public interface WaterBasedRepository extends JpaRepository<WaterBasedRecipe, UU
 
   List<WaterBasedRecipe> findBySyrup(SyrupType syrup);
 
-  List<WaterBasedRecipe> findByWaterType(WaterType water);
+  List<WaterBasedRecipe> findByWater(WaterType water);
 
   List<WaterBasedRecipe> findByTemperature(Temperature temperature);
 
