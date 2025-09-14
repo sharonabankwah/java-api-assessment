@@ -117,6 +117,7 @@ USE moodcha;
 2. Import the sample data:
 ```bash
 mysql -u <username> -p moodcha < src/main/resources/templates/moodchaDatabaseDump.sql
+```
 
 3. Verify the sample data exists:
 ```sql
