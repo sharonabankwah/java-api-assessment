@@ -51,7 +51,7 @@ src/
  ┣ resources/
  ┃ ┣ static/
  ┃ ┣ templates/
- ┃ ┃ ┗ moodcha_dump.sql
+ ┃ ┃ ┗ moodchaDatabaseDump.sql
  ┃ ┣ application.properties
  ┃ ┗ local.properties
 ```
