@@ -12,8 +12,7 @@ Moodcha is a Spring Boot–based REST API that manages matcha recipes tailored t
 - [Database Setup & Sample Data](#database-setup--sample-data)  
 - [API Endpoints](#api-endpoints)  
 - [Exception Handling](#exception-handling)  
-- [Testing](#testing)  
-- [Usage Example](#usage-example)
+- [Testing](#testing)
 
 ### ✨ Features
 
@@ -33,7 +32,7 @@ Moodcha is a Spring Boot–based REST API that manages matcha recipes tailored t
 * Maven
 * JUnit 5 + Mockito for unit tests
 
-## 💻 Prerequisites
+### 💻 Prerequisites
 
 * Java 21
 * MySQL
@@ -110,8 +109,7 @@ cd java-api-assessment
 ### Database Setup
 
 1. Ensure your MySQL server is running. Create the database if not already present:
-2. 
-```bash
+```sql
 CREATE DATABASE moodcha;
 USE moodcha;
 ```
@@ -119,8 +117,66 @@ USE moodcha;
 2. Import the sample data:
 ```bash
 mysql -u <username> -p moodcha < src/main/resources/templates/moodchaDatabaseDump.sql
+
+3. Verify the sample data exists:
+```sql
+SELECT * FROM milk_recipes;
+SELECT * FROM water_recipes;
+SELECT * FROM juice_recipes;
+```
+### 🌐 API Endpoints
+
+| Method                                                   | Path                        |
+| -------------------------------------------------------- | --------------------------- | 
+| `GET /api/recipes/{id}`                                  | Get a recipe by its UUID    |         
+| `POST /api/recipes`                                      | Create a new recipe         |         
+| `PUT /api/recipes/{id}`                                  | Update an existing recipe   |         
+| `DELETE /api/recipes/{id}`                               | Delete a recipe by its UUID |         
+| `GET /api/recipes/mood?mood={mood}`                      | Filter by mood              |         
+| `GET /api/recipes/flavour?flavour={flavour}`             | Filter by flavour           |         
+| `GET /api/recipes/milk?milk={milkType}`                  | Filter by milk type         |         
+| `GET /api/recipes/temperature?temperature={temperature}` | Filter by temperature       |         
+| `GET /api/recipes/syrup?syrup={syrupType}`               | Filter by syrup type        |         
+| `GET /api/recipes/random`                                | Get a random recipe         |         
+
+#### Request/Response Examples
+
+* GET by ID:
+```bash
+GET /api/recipes/b3c7d8a0-55d1-4d0d-9b2e-6f2d5b63c2fa
 ```
 
+* POST body to create recipe:
+```json
+{
+  "mood": "HAPPY",
+  "flavour": "SWEET",
+  "temperature": "ICED",
+  "syrup": "VANILLA",
+  "supplements": "PROTEIN",
+  "allergies": NULL,
+  "milk": "OAT"
+}
+```
+### 🚨 Exception Handling
 
-3. 
-4. 
+* RecipeNotFoundException is thrown when trying to GET, PUT or DELETE by an ID that doesn’t exist.
+* The API returns HTTP status 404 Not Found and a message like:
+
+```json
+{
+  "timestamp": "2025-09-14T12:20:42.189+00:00",
+  "status": 404,
+  "error": "Not Found",
+  "message": "Oops... recipe not found with id: <UUID> Try again!"
+}
+```
+
+### 🔎 Testing
+
+* Unit test added for RecipeService.getRecipeById(UUID id) using JUnit 5 + Mockito.
+* To run all tests:
+
+```bash
+  ./mvnw test
+```
