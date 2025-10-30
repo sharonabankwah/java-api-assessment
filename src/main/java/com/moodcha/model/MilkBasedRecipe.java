@@ -1,6 +1,7 @@
 package com.moodcha.model;
 
 import com.moodcha.model.enums.Mood;
+
 import com.moodcha.model.enums.Flavour;
 import com.moodcha.model.enums.MilkType;
 import com.moodcha.model.enums.Temperature;
@@ -15,6 +16,7 @@ import jakarta.persistence.Column;
 @Table(name = "milk_recipes")
 public class MilkBasedRecipe extends BaseRecipe {
 
+  
   @Column(nullable = false)
   @Enumerated(EnumType.STRING)
   private MilkType milk;

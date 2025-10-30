@@ -35,6 +35,11 @@ public class RecipeService {
   }
 
   public BaseRecipe createRecipe(BaseRecipe recipe) {
+
+    if (recipe.getId() == null) {
+      recipe.setId(UUID.randomUUID());
+    }
+
     if (recipe instanceof MilkBasedRecipe) {
         return milkRepo.save((MilkBasedRecipe) recipe);
     } else if (recipe instanceof WaterBasedRecipe) {

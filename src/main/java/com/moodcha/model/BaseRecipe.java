@@ -1,6 +1,10 @@
 package com.moodcha.model;
 
 import java.util.UUID;
+
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
+
 import com.moodcha.model.enums.Flavour;
 import com.moodcha.model.enums.Mood;
 import com.moodcha.model.enums.SyrupType;
@@ -8,8 +12,6 @@ import com.moodcha.model.enums.Temperature;
 import jakarta.persistence.Column;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
@@ -17,8 +19,8 @@ import jakarta.persistence.MappedSuperclass;
 public abstract class BaseRecipe {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.UUID)
-  @Column(length = 36, updatable = false, nullable = false)
+  @JdbcTypeCode(SqlTypes.CHAR)
+  @Column(columnDefinition = "CHAR(36)", updatable = false, nullable = false)
   private UUID id;
 
   @Enumerated(EnumType.STRING)
@@ -77,6 +79,10 @@ public abstract class BaseRecipe {
 
   public String getAllergies() {
     return allergies;
+  }
+
+  public void setId(UUID id) {
+    this.id = id;
   }
 
   public void setMood(Mood mood) {
