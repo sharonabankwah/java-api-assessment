@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "juice_recipes")
@@ -17,11 +18,13 @@ public class JuiceBasedRecipe extends BaseRecipe {
 
   @Column(nullable = false)
   @Enumerated(EnumType.STRING)
+  @NotNull(message = "Juice type is required")
   private JuiceType juice;
 
   @Column(nullable = false)
   @Enumerated(EnumType.STRING)
-  private Temperature temperature = Temperature.ICED;
+  @NotNull(message = "Temperature is required")
+  private Temperature temperature;
 
   public JuiceBasedRecipe(Mood mood, Flavour flavour, Temperature temperature, SyrupType syrup, String supplements, 
                          String allergies, JuiceType juice) {

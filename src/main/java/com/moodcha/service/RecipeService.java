@@ -34,18 +34,19 @@ public class RecipeService {
     this.juiceRepo = juiceRepo;
   }
 
-  public BaseRecipe createRecipe(BaseRecipe recipe) {
+  @SuppressWarnings("unchecked")
+  public <T extends BaseRecipe> T createRecipe(BaseRecipe recipe) {
 
     if (recipe.getId() == null) {
       recipe.setId(UUID.randomUUID());
     }
 
     if (recipe instanceof MilkBasedRecipe) {
-        return milkRepo.save((MilkBasedRecipe) recipe);
+        return (T) milkRepo.save((MilkBasedRecipe) recipe);
     } else if (recipe instanceof WaterBasedRecipe) {
-        return waterRepo.save((WaterBasedRecipe) recipe);
+        return (T) waterRepo.save((WaterBasedRecipe) recipe);
     } else if (recipe instanceof JuiceBasedRecipe) {
-        return juiceRepo.save((JuiceBasedRecipe) recipe);
+        return (T) juiceRepo.save((JuiceBasedRecipe) recipe);
     } else {
       throw new IllegalArgumentException("Oops... unknown recipe. Try again!");
     }
@@ -71,34 +72,45 @@ public class RecipeService {
     return allRecipes;
   }
 
-  public BaseRecipe updateRecipe(UUID id, BaseRecipe updatedRecipe) {
-    BaseRecipe existingRecipe = getRecipeById(id);
+  // public BaseRecipe updateRecipe(UUID id, BaseRecipe updatedRecipe) {
+  //   BaseRecipe existingRecipe = getRecipeById(id);
 
-    existingRecipe.setMood(updatedRecipe.getMood());
-    existingRecipe.setFlavour(updatedRecipe.getFlavour());
-    existingRecipe.setTemperature(updatedRecipe.getTemperature());
-    existingRecipe.setSyrup(updatedRecipe.getSyrup());
-    existingRecipe.setAllergies(updatedRecipe.getAllergies());
-    existingRecipe.setSupplements(updatedRecipe.getSupplements());
+  //   existingRecipe.setMood(updatedRecipe.getMood());
+  //   existingRecipe.setFlavour(updatedRecipe.getFlavour());
+  //   existingRecipe.setTemperature(updatedRecipe.getTemperature());
+  //   existingRecipe.setSyrup(updatedRecipe.getSyrup());
+  //   existingRecipe.setAllergies(updatedRecipe.getAllergies());
+  //   existingRecipe.setSupplements(updatedRecipe.getSupplements());
 
-    // Child-specific fields
-    if (existingRecipe instanceof MilkBasedRecipe && updatedRecipe instanceof MilkBasedRecipe) {
-      ((MilkBasedRecipe) existingRecipe).setMilk(((MilkBasedRecipe) updatedRecipe).getMilk());
-    } else if (existingRecipe instanceof WaterBasedRecipe && updatedRecipe instanceof WaterBasedRecipe) {
-      ((WaterBasedRecipe) existingRecipe).setWater(((WaterBasedRecipe) updatedRecipe).getWater());
-    } else if (existingRecipe instanceof JuiceBasedRecipe && updatedRecipe instanceof JuiceBasedRecipe) {
-      ((JuiceBasedRecipe) existingRecipe).setJuice(((JuiceBasedRecipe) updatedRecipe).getJuice());
-    }
+  //   // Child-specific fields
+  //   if (existingRecipe instanceof MilkBasedRecipe && updatedRecipe instanceof MilkBasedRecipe) {
+  //     ((MilkBasedRecipe) existingRecipe).setMilk(((MilkBasedRecipe) updatedRecipe).getMilk());
+  //   } else if (existingRecipe instanceof WaterBasedRecipe && updatedRecipe instanceof WaterBasedRecipe) {
+  //     ((WaterBasedRecipe) existingRecipe).setWater(((WaterBasedRecipe) updatedRecipe).getWater());
+  //   } else if (existingRecipe instanceof JuiceBasedRecipe && updatedRecipe instanceof JuiceBasedRecipe) {
+  //     ((JuiceBasedRecipe) existingRecipe).setJuice(((JuiceBasedRecipe) updatedRecipe).getJuice());
+  //   }
 
-    if (existingRecipe instanceof MilkBasedRecipe) {
-      return milkRepo.save((MilkBasedRecipe) existingRecipe);
-    } else if (existingRecipe instanceof WaterBasedRecipe) {
-      return waterRepo.save((WaterBasedRecipe) existingRecipe);
-    } else if (existingRecipe instanceof JuiceBasedRecipe) {
-      return juiceRepo.save((JuiceBasedRecipe) existingRecipe);
-    } else {
-      throw new IllegalArgumentException("Oops... unknown recipe. Try again!");
-    }
+  //   if (existingRecipe instanceof MilkBasedRecipe) {
+  //     return milkRepo.save((MilkBasedRecipe) existingRecipe);
+  //   } else if (existingRecipe instanceof WaterBasedRecipe) {
+  //     return waterRepo.save((WaterBasedRecipe) existingRecipe);
+  //   } else if (existingRecipe instanceof JuiceBasedRecipe) {
+  //     return juiceRepo.save((JuiceBasedRecipe) existingRecipe);
+  //   } else {
+  //     throw new IllegalArgumentException("Oops... unknown recipe. Try again!");
+  //   }
+  // }
+
+  // Service
+  public MilkBasedRecipe updateMilkRecipe(UUID id, MilkBasedRecipe updatedRecipe) {
+    MilkBasedRecipe existing = milkRepo.findById(id)
+        .orElseThrow(() -> new RuntimeException("Recipe not found"));
+    existing.setMood(updatedRecipe.getMood());
+    existing.setFlavour(updatedRecipe.getFlavour());
+    existing.setTemperature(updatedRecipe.getTemperature());
+    existing.setMilk(updatedRecipe.getMilk());
+    return milkRepo.save(existing);
   }
 
   public void deleteRecipeById(UUID id) {

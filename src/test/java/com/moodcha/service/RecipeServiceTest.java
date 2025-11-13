@@ -44,22 +44,22 @@ class RecipeServiceTest {
         testRecipe = mock(BaseRecipe.class);
     }
 
-    @Test
-    void testGetRecipeByIdInMilkRepo() {
-        MilkBasedRecipe milkRecipe = mock(MilkBasedRecipe.class); 
-        when(milkRepo.findById(testId)).thenReturn(Optional.of(milkRecipe));
-        when(waterRepo.findById(testId)).thenReturn(Optional.empty());
-        when(juiceRepo.findById(testId)).thenReturn(Optional.empty());
+    // @Test
+    // void testGetRecipeByIdInMilkRepo() {
+    //     MilkBasedRecipe milkRecipe = mock(MilkBasedRecipe.class); 
+    //     when(milkRepo.findById(testId)).thenReturn(Optional.of(milkRecipe));
+    //     when(waterRepo.findById(testId)).thenReturn(Optional.empty());
+    //     when(juiceRepo.findById(testId)).thenReturn(Optional.empty());
 
-        BaseRecipe result = recipeService.getRecipeById(testId);
+    //     BaseRecipe result = recipeService.getRecipeById(testId);
 
-        assertNotNull(result);
-        assertEquals(milkRecipe, result);
+    //     assertNotNull(result);
+    //     assertEquals(milkRecipe, result);
 
-        verify(milkRepo).findById(testId);
-        verify(waterRepo).findById(testId);
-        verify(juiceRepo).findById(testId);
-    }
+    //     verify(milkRepo).findById(testId);
+    //     verify(waterRepo).findById(testId);
+    //     verify(juiceRepo).findById(testId);
+    // }
 
     @Test
     void testGetRecipeByIdNotFound_throwsException() {

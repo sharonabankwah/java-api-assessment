@@ -14,6 +14,8 @@ import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @MappedSuperclass
 public abstract class BaseRecipe {
@@ -23,12 +25,15 @@ public abstract class BaseRecipe {
   @Column(columnDefinition = "CHAR(36)", updatable = false, nullable = false)
   private UUID id;
 
+  @NotNull(message = "Mood is required")
   @Enumerated(EnumType.STRING)
   private Mood mood;
 
+  @NotNull(message = "Flavour is required")
   @Enumerated(EnumType.STRING)
   private Flavour flavour;
 
+  @NotNull(message = "Temperature is required")
   @Column(nullable =  false)
   @Enumerated(EnumType.STRING)
   private Temperature temperature;
@@ -36,7 +41,9 @@ public abstract class BaseRecipe {
   @Enumerated(EnumType.STRING)
   private SyrupType syrup; 
 
+  @Size(max = 255, message = "Supplements text too long")
   private String supplements;
+  @Size(max = 255, message = "Allergies text too long")
   private String allergies;
 
   public BaseRecipe(Mood mood, Flavour flavour, Temperature temperature, SyrupType syrup, 

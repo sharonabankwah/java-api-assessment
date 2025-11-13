@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import jakarta.persistence.Column;
 
 @Entity
@@ -19,6 +20,7 @@ public class MilkBasedRecipe extends BaseRecipe {
   
   @Column(nullable = false)
   @Enumerated(EnumType.STRING)
+  @NotNull(message = "Milk type is required")
   private MilkType milk;
 
 
