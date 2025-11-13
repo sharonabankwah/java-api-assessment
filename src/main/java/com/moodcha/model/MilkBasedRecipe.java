@@ -17,24 +17,25 @@ import jakarta.persistence.Column;
 @Table(name = "milk_recipes")
 public class MilkBasedRecipe extends BaseRecipe {
 
-  
+  // Required milk type for milk-based recipes
   @Column(nullable = false)
   @Enumerated(EnumType.STRING)
   @NotNull(message = "Milk type is required")
   private MilkType milk;
 
-
+  // Constructor with all fields
   public MilkBasedRecipe(Mood mood, Flavour flavour, Temperature temperature, SyrupType syrup, String supplements, 
                          String allergies, MilkType milk) {
       super(mood, flavour, temperature, syrup, supplements, allergies);
       this.milk = milk;
   }
-
+  
+  // No-arg constructor
   public MilkBasedRecipe() {
-    // no-arg constructor
     super();
   }
 
+  // Getters and setters
   public MilkType getMilk() {
     return milk;
   }

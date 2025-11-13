@@ -20,32 +20,39 @@ import jakarta.validation.constraints.Size;
 @MappedSuperclass
 public abstract class BaseRecipe {
 
+  // Unique identifier for every recipe
   @Id
   @JdbcTypeCode(SqlTypes.CHAR)
   @Column(columnDefinition = "CHAR(36)", updatable = false, nullable = false)
   private UUID id;
 
+  // Mood of the recipe: e.g., SAD, TIRED, ANXIOUS, CALM etc.
   @NotNull(message = "Mood is required")
   @Enumerated(EnumType.STRING)
   private Mood mood;
 
+  // Flavour of the recipe: e.g., SWEET, NUTTY, FRUITY, BITTER 
   @NotNull(message = "Flavour is required")
   @Enumerated(EnumType.STRING)
   private Flavour flavour;
 
+  // Temperature of the recipe: e.g., HOT or ICED
   @NotNull(message = "Temperature is required")
   @Column(nullable =  false)
   @Enumerated(EnumType.STRING)
   private Temperature temperature;
 
+  // Optional syrup type: VANILLA, BLUEBERRY, AGAVE, MANGO etc.
   @Enumerated(EnumType.STRING)
   private SyrupType syrup; 
 
+  // Optional string fields for supplements and allergies
   @Size(max = 255, message = "Supplements text too long")
   private String supplements;
   @Size(max = 255, message = "Allergies text too long")
   private String allergies;
 
+  // Constructor with all fields
   public BaseRecipe(Mood mood, Flavour flavour, Temperature temperature, SyrupType syrup, 
                     String supplements, String allergies) {
     this.mood = mood;
@@ -56,10 +63,11 @@ public abstract class BaseRecipe {
     this.allergies = allergies;
   }
 
+  // No-arg constructor
   public BaseRecipe() {
-    // no-arg constructor
   }
 
+  // Getters and Setters
   public UUID getId() {
     return id;
   }
